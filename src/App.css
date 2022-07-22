@@ -2,6 +2,9 @@
   text-align: center;
 }
 
-.redBg{
-  background-color: blue;
+.main-bg{
+  height:600px;
+  background-image: url('./img/nhnbg.png');
+  background-size: cover;
+  background-position: center;
 }
