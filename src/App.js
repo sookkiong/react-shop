@@ -1,9 +1,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
+import {useState} from "react";
+import data from './data.js';
 
 
 function App() {
+
+  let [shoes] = useState(data)
+
+
   return (
     <div className="App">
        <Navbar bg="light" variant="light">
@@ -22,19 +28,19 @@ function App() {
       <Container>
       <Row>
         <Col sm>
-          <img src={`${process.env.PUBLIC_URL}/img/cn1.jpg`} width="100%"/>
-          <h4>상품명</h4>
-          <p>상품설명</p>
+          <img src={`${process.env.PUBLIC_URL}/img/cn1.jpg`} width="80%"/>
+          <h4>{shoes[0].title}</h4>
+          <p>{shoes[0].price}</p>
         </Col>
         <Col sm>
-          <img src="img/cn2.jpg" width="100%"/>
-          <h4>상품명</h4>
-          <p>상품설명</p>
+          <img src="img/cn2.jpg" width="80%"/>
+          <h4>{shoes[1].title}</h4>
+          <p>{shoes[1].price}</p>
         </Col>
         <Col sm>
-          <img src="img/cn3.jpg" width="100%"/>
-          <h4>상품명</h4>
-          <p>상품설명</p>
+          <img src="img/cn3.jpg" width="80%"/>
+          <h4>{shoes[2].title}</h4>
+          <p>{shoes[2].price}</p>
         </Col>
       </Row>
     </Container>
