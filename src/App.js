@@ -8,7 +8,6 @@ import data from './data.js';
 function App() {
 
   let [shoes] = useState(data)
-  const goodsArr = [1,2,3];
 
   return (
     <div className="App">
@@ -45,7 +44,7 @@ function App() {
         </Row>
       </Container> */}
 
-      <Goods shoes={shoes} goodsArr={goodsArr}/>
+      <Goods shoes={shoes}/>
     </div>
   );
 }
