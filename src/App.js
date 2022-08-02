@@ -12,26 +12,6 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <div className="main-bg"></div>
-
-              <Goods shoes={shoes} />
-            </div>
-          }
-        />
-        <Route path="/detail" element={<DetailPage />} />
-        <Route path="/about" element={<About />}>
-          <Route path="member" element={<div>멤버 사이트</div>} />
-          <Route path="location" element={<div>위치 정보 사이트</div>} />
-        </Route>
-
-        <Route path="*" element={<div>없는 페이지 입니다.</div>} />
-      </Routes>
-
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/">Soo Shop</Navbar.Brand>
@@ -53,6 +33,30 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div className="main-bg"></div>
+
+              <Goods shoes={shoes} />
+            </div>
+          }
+        />
+        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/about" element={<About />}>
+          <Route path="member" element={<div>멤버 사이트</div>} />
+          <Route path="location" element={<div>위치 정보 사이트</div>} />
+        </Route>
+        <Route path="/event" element={<Event />}>
+          <Route path="one" element={<div>첫 주문 시 양배추즙 서비스</div>} />
+          <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
+        </Route>
+
+        <Route path="*" element={<div>없는 페이지 입니다.</div>} />
+      </Routes>
     </div>
   );
 }
@@ -81,6 +85,15 @@ const About = () => {
   return (
     <div>
       <h4>회사정보임</h4>
+      <Outlet></Outlet>
+    </div>
+  );
+};
+
+const Event = () => {
+  return (
+    <div>
+      <h2>오늘의 이벤트</h2>
       <Outlet></Outlet>
     </div>
   );
