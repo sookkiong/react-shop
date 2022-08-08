@@ -5,13 +5,23 @@ import { useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import DetailPage from './pages/detailpage';
+import styled from 'styled-components';
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
+
+  let YellowBtn = styled.button`
+    background: ${(props) => props.bg};
+    color: ${(props) => (props.bg == 'blue' ? 'white' : 'black')};
+    padding: 10px;
+  `;
 
   return (
     <div className="App">
+      <YellowBtn bg="blue">버튼</YellowBtn>
+      <YellowBtn bg="yellow">버튼</YellowBtn>
+
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/">Soo Shop</Navbar.Brand>
@@ -41,11 +51,13 @@ function App() {
             <div>
               <div className="main-bg"></div>
 
+              <div style={{ margin: '20px 0' }}></div>
+
               <Goods shoes={shoes} />
             </div>
           }
         />
-
+        <Route path="/detail" element={<div>상세페이지입니다.</div>} />
         <Route path="/detail/:id" element={<DetailPage shoes={shoes} />} />
 
         <Route path="/about" element={<About />}>
