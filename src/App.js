@@ -17,10 +17,24 @@ function App() {
     padding: 10px;
   `;
 
+  let NewBox = styled.div`
+    background: ${(props) => props.boxBg};
+    color: ${(props) => props.boxColor};
+    width: 100px;
+    height: 100px;
+  `;
+
   return (
     <div className="App">
       <YellowBtn bg="blue">버튼</YellowBtn>
       <YellowBtn bg="yellow">버튼</YellowBtn>
+
+      <NewBox boxBg="yellow" boxColor="blue">
+        박스
+      </NewBox>
+      <NewBox boxBg="red" boxColor="#fff">
+        박스
+      </NewBox>
 
       <Navbar bg="light" variant="light">
         <Container>
