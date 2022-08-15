@@ -5,10 +5,18 @@ import { useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import DetailPage from './pages/detailpage';
+import { useEffect } from 'react';
 
 function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
+  let [showBox, setShowBox] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowBox(!showBox);
+    }, 3000);
+  }, []);
 
   return (
     <div className="App">
@@ -47,7 +55,25 @@ function App() {
             </div>
           }
         />
-        <Route path="/detail" element={<div>상세페이지입니다.</div>} />
+        <Route
+          path="/detail"
+          element={
+            <>
+              <div>상세페이지입니다.</div>
+              {showBox ? (
+                <div
+                  style={{
+                    background: 'yellow',
+                    padding: '50px 0',
+                    marginTop: '20px',
+                  }}
+                >
+                  어서오세요?
+                </div>
+              ) : null}
+            </>
+          }
+        />
         <Route path="/detail/:id" element={<DetailPage shoes={shoes} />} />
 
         <Route path="/about" element={<About />}>
