@@ -11,12 +11,17 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
   let [showBox, setShowBox] = useState(true);
+  let [boxNum, setBoxNum] = useState(3);
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowBox(!showBox);
-    }, 3000);
-  }, []);
+    if (boxNum > 0) {
+      setTimeout(() => {
+        setBoxNum(boxNum - 1);
+      }, 1000);
+    } else {
+      setShowBox(false);
+    }
+  }, [boxNum]);
 
   return (
     <div className="App">
@@ -68,7 +73,7 @@ function App() {
                     marginTop: '20px',
                   }}
                 >
-                  어서오세요?
+                  저는 {boxNum}초 뒤 사라져요! <br />
                 </div>
               ) : null}
             </>
