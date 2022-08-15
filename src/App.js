@@ -21,6 +21,8 @@ function App() {
     } else {
       setShowBox(false);
     }
+
+    return () => {};
   }, [boxNum]);
 
   return (
