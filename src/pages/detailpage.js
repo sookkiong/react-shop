@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import styled from 'styled-components';
 
 const DetailPage = (props) => {
   let [count, setCount] = useState(0);
@@ -14,6 +15,27 @@ const DetailPage = (props) => {
       setAlertNum(false);
     }
   }, [content]);
+
+  let RedButton = styled.button`
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    &#button {
+      color: blue;
+      &:disabled {
+        background-color: grey;
+        color: white;
+        cursor: default;
+      }
+    }
+    &:hover {
+      background-color: grey;
+    }
+
+    border: none;
+  `;
 
   return (
     <div className="container">
@@ -31,7 +53,9 @@ const DetailPage = (props) => {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <RedButton id="button" disabled={alertNum}>
+            주문하기
+          </RedButton>
         </div>
       </div>
     </div>
