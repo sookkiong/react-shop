@@ -6,6 +6,7 @@ import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import DetailPage from './pages/detailpage';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -59,6 +60,21 @@ function App() {
               <div style={{ margin: '20px 0' }}></div>
 
               <Goods shoes={shoes} />
+
+              <button
+                onClick={() => {
+                  axios
+                    .get('https://codingapple1.github.io/shop/data2.json')
+                    .then((data) => {
+                      console.log(data.data);
+                    })
+                    .catch(() => {
+                      console.log('실패함');
+                    });
+                }}
+              >
+                버튼
+              </button>
             </div>
           }
         />
