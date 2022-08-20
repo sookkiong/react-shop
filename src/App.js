@@ -13,9 +13,8 @@ function App() {
   let navigate = useNavigate();
   let [showBox, setShowBox] = useState(true);
   let [boxNum, setBoxNum] = useState(3);
-  let [db, setDb] = useState({
-    data: [],
-  });
+  let [db, setDb] = useState([]);
+  let [article, setArticle] = useState([]);
 
   useEffect(() => {
     if (boxNum > 0) {
@@ -28,6 +27,12 @@ function App() {
 
     return () => {};
   }, [boxNum]);
+
+  useEffect(() => {
+    axios.get('https://codingapple1.github.io/shop/data2.json').then((serverData) => {
+      setDb(serverData.data);
+    });
+  }, [db]);
 
   return (
     <div className="App">
@@ -64,19 +69,29 @@ function App() {
 
               <Goods shoes={shoes} />
 
-              {db.data.map((v, i) => {
+              {db.map((v, i) => {
                 return <div>{v.id}</div>;
+              })}
+              {article.map((v, i) => {
+                return (
+                  <>
+                    <div>{v.title}</div>
+                    <div>{v.content}</div>
+                  </>
+                );
               })}
 
               <button
                 onClick={() => {
                   axios
-                    .get('https://codingapple1.github.io/shop/data2.json')
-                    .then((data) => {
-                      setDb(data);
+                    .get('http://suple.cafe24app.com/api/article')
+                    .then((데이터) => {
+                      setArticle(데이터.data);
                     })
-                    .catch(() => {
-                      console.log('실패함');
+                    .catch((error) => {
+                      if (error.response.status === 404) {
+                        alert('서버 요청에 실패하였습니다');
+                      }
                     });
                 }}
               >
