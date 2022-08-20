@@ -13,6 +13,9 @@ function App() {
   let navigate = useNavigate();
   let [showBox, setShowBox] = useState(true);
   let [boxNum, setBoxNum] = useState(3);
+  let [db, setDb] = useState({
+    data: [],
+  });
 
   useEffect(() => {
     if (boxNum > 0) {
@@ -61,12 +64,16 @@ function App() {
 
               <Goods shoes={shoes} />
 
+              {db.data.map((v, i) => {
+                return <div>{v.id}</div>;
+              })}
+
               <button
                 onClick={() => {
                   axios
                     .get('https://codingapple1.github.io/shop/data2.json')
                     .then((data) => {
-                      console.log(data.data);
+                      setDb(data);
                     })
                     .catch(() => {
                       console.log('실패함');
@@ -122,7 +129,11 @@ const Goods = (props) => {
           return (
             <div>
               <Col sm>
-                <img src={`${process.env.PUBLIC_URL}/img/cn${i + 1}.jpg`} width="80%" alt="사진1" />
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/cn${i + 1}.jpg`}
+                  width="80%"
+                  alt={`사진${i + 1}`}
+                />
                 <h4>{v.title}</h4>
                 <p>{v.price}</p>
               </Col>
