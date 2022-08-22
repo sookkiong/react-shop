@@ -14,8 +14,8 @@ function App() {
   let [showBox, setShowBox] = useState(true);
   let [boxNum, setBoxNum] = useState(3);
   let [db, setDb] = useState([]);
-  let [article, setArticle] = useState([]);
-
+  let [userClick, setUserClick] = useState(0);
+  let [msg, setMsg] = useState(false);
   useEffect(() => {
     if (boxNum > 0) {
       setTimeout(() => {
@@ -27,12 +27,6 @@ function App() {
 
     return () => {};
   }, [boxNum]);
-
-  useEffect(() => {
-    axios.get('https://codingapple1.github.io/shop/data2.json').then((serverData) => {
-      setDb(serverData.data);
-    });
-  }, [db]);
 
   return (
     <div className="App">
@@ -68,44 +62,35 @@ function App() {
               <div style={{ margin: '20px 0' }}></div>
 
               <Goods shoes={shoes} />
-
               {db.map((v, i) => {
-                return <div>{v.id}</div>;
-              })}
-              {article.map((v, i) => {
                 return (
                   <>
-                    <div>{v.title}</div>
-                    <div>{v.content}</div>
+                    <div>{v.id}번 상품</div>
                   </>
                 );
               })}
+              {msg ? <div>로딩중</div> : null}
 
               <button
                 onClick={() => {
-                  axios
-                    .get('http://suple.cafe24app.com/api/article')
-                    .then((데이터) => {
-                      setArticle(데이터.data);
-                    })
-                    .catch((error) => {
-                      if (error.response.status === 404) {
-                        alert('서버 요청에 실패하였습니다');
-                      }
-                    });
-
-                  axios.post('/fdgd', { name: 'kim' });
-
-                  Promise.all([axios.get('/url1'), axios.get('/url2')]).then(() => {});
-
-                  fetch('http://suple.cafe24app.com/api/article')
-                    .then((data1) => data1.json())
-                    .then((data2) => {
-                      console.log(data2);
-                    });
+                  setMsg(true);
+                  setTimeout(() => {
+                    setMsg(false);
+                    axios
+                      .get(`https://codingapple1.github.io/shop/data${userClick + 2}.json`)
+                      .then((data) => {
+                        setUserClick(userClick + 1);
+                        setDb(db.concat(data.data));
+                      })
+                      .catch((error) => {
+                        if (error.response.status === 404) {
+                          alert('마지막 페이지');
+                        }
+                      });
+                  }, 1000);
                 }}
               >
-                버튼
+                더 보기
               </button>
             </div>
           }
