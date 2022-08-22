@@ -93,6 +93,16 @@ function App() {
                         alert('서버 요청에 실패하였습니다');
                       }
                     });
+
+                  axios.post('/fdgd', { name: 'kim' });
+
+                  Promise.all([axios.get('/url1'), axios.get('/url2')]).then(() => {});
+
+                  fetch('http://suple.cafe24app.com/api/article')
+                    .then((data1) => data1.json())
+                    .then((data2) => {
+                      console.log(data2);
+                    });
                 }}
               >
                 버튼
