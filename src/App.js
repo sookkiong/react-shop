@@ -84,7 +84,7 @@ function App() {
                       })
                       .catch((error) => {
                         if (error.response.status === 404) {
-                          alert('마지막 페이지');
+                          alert('마지막 페이지요');
                         }
                       });
                   }, 1000);
