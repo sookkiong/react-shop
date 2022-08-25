@@ -14,19 +14,8 @@ function App() {
   let [showBox, setShowBox] = useState(true);
   let [boxNum, setBoxNum] = useState(3);
   let [db, setDb] = useState([]);
-  let [userClick, setUserClick] = useState(0);
+  let [userClick, setUserClick] = useState(2);
   let [msg, setMsg] = useState(false);
-  useEffect(() => {
-    if (boxNum > 0) {
-      setTimeout(() => {
-        setBoxNum(boxNum - 1);
-      }, 1000);
-    } else {
-      setShowBox(false);
-    }
-
-    return () => {};
-  }, [boxNum]);
 
   return (
     <div className="App">
@@ -74,20 +63,18 @@ function App() {
               <button
                 onClick={() => {
                   setMsg(true);
-                  setTimeout(() => {
-                    setMsg(false);
-                    axios
-                      .get(`https://codingapple1.github.io/shop/data${userClick + 2}.json`)
-                      .then((data) => {
-                        setUserClick(userClick + 1);
-                        setDb(db.concat(data.data));
-                      })
-                      .catch((error) => {
-                        if (error.response.status === 404) {
-                          alert('마지막 페이지요');
-                        }
-                      });
-                  }, 1000);
+                  axios
+                    .get(`https://codingapple1.github.io/shop/data${userClick}.json`)
+                    .then((data) => {
+                      setDb(db.concat(data.data));
+                      setUserClick(userClick + 1);
+                    })
+                    .catch((error) => {
+                      if (error.response.status === 404) {
+                        alert('마지막 페이지입니다');
+                      }
+                    });
+                  setMsg(false);
                 }}
               >
                 더 보기
