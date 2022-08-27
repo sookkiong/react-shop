@@ -10,6 +10,7 @@ const DetailPage = (props) => {
   let [alertNum, setAlertNum] = useState(false);
   let [content, setContent] = useState('');
   let [탭, 탭변경] = useState(0);
+  let [nope, setNope] = useState('');
 
   useEffect(() => {
     if (isNaN(content) == true) {
@@ -18,6 +19,13 @@ const DetailPage = (props) => {
       setAlertNum(false);
     }
   }, [content]);
+
+  useEffect(() => {
+    setNope('end');
+    return () => {
+      setNope('');
+    };
+  }, []);
 
   let RedButton = styled.button`
     background-color: red;
@@ -41,7 +49,7 @@ const DetailPage = (props) => {
   `;
 
   return (
-    <div className="container">
+    <div className={`container + start + ${nope}`}>
       <div className="row">
         <div className="col-md-6">
           <img
