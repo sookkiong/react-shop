@@ -1,3 +1,4 @@
+import '../App.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
@@ -99,29 +100,23 @@ const DetailPage = (props) => {
   );
 };
 
-/* const TabContent = (props) => {
-  if (props.탭 == 0) {
-    return <div>내용 0</div>;
-  } else if (props.탭 == 1) {
-    return <div>내용 1</div>;
-  } else if (props.탭 == 2) {
-    return <div>내용 2</div>;
-  }
-}; */
-
-/* const TabContent = ({ 탭 }) => {
-  if (탭 == 0) {
-    return <div>내용 0</div>;
-  } else if (탭 == 1) {
-    return <div>내용 1</div>;
-  } else if (탭 == 2) {
-    return <div>내용 2</div>;
-  }
-}; */
-
 const TabContent = ({ 탭 }) => {
   //탭이 0이면 왼쪽 배열 중 0번째 애가 출력 됨.
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭];
+  let [fade, setFade] = useState('');
+  useEffect(() => {
+    setTimeout(() => {
+      setFade('end');
+    }, 100);
+
+    return () => {
+      setFade('');
+    };
+  }, [탭]);
+  return (
+    <div className={`start + ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
 };
 
 export default DetailPage;
