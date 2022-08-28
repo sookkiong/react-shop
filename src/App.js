@@ -7,6 +7,9 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import DetailPage from './pages/detailpage';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { createContext } from 'react';
+
+export let Context1 = createContext();
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -17,6 +20,7 @@ function App() {
   let [userClick, setUserClick] = useState(2);
   let [msg, setMsg] = useState(false);
 
+  let [재고] = useState([10, 11, 12]);
   return (
     <div className="App">
       <Navbar bg="light" variant="light">
@@ -101,7 +105,14 @@ function App() {
             </>
           }
         />
-        <Route path="/detail/:id" element={<DetailPage shoes={shoes} />} />
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ 재고 }}>
+              <DetailPage shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버 사이트</div>} />

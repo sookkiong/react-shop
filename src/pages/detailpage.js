@@ -1,8 +1,10 @@
 import '../App.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
+
+import { Context1 } from '../App.js';
 
 const DetailPage = (props) => {
   let [count, setCount] = useState(0);
@@ -103,13 +105,15 @@ const DetailPage = (props) => {
         </Nav.Item>
       </Nav>
 
-      <TabContent 탭={탭} shoes={props.shoes} />
+      <TabContent 탭={탭} />
     </div>
   );
 };
 
 const TabContent = ({ 탭, shoes }) => {
   let [fade, setFade] = useState('');
+  let { 재고 } = useContext(Context1);
+
   useEffect(() => {
     setTimeout(() => {
       setFade('end');
@@ -121,7 +125,7 @@ const TabContent = ({ 탭, shoes }) => {
   }, [탭]);
   return (
     <div className={`start + ${fade}`}>
-      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 };
