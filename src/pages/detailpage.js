@@ -103,13 +103,12 @@ const DetailPage = (props) => {
         </Nav.Item>
       </Nav>
 
-      <TabContent 탭={탭} />
+      <TabContent 탭={탭} shoes={props.shoes} />
     </div>
   );
 };
 
-const TabContent = ({ 탭 }) => {
-  //탭이 0이면 왼쪽 배열 중 0번째 애가 출력 됨.
+const TabContent = ({ 탭, shoes }) => {
   let [fade, setFade] = useState('');
   useEffect(() => {
     setTimeout(() => {
@@ -122,7 +121,7 @@ const TabContent = ({ 탭 }) => {
   }, [탭]);
   return (
     <div className={`start + ${fade}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 };
