@@ -8,6 +8,7 @@ import DetailPage from './pages/detailpage';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
+import Cart from './pages/Cart.js';
 
 export let Context1 = createContext();
 
@@ -19,8 +20,8 @@ function App() {
   let [db, setDb] = useState([]);
   let [userClick, setUserClick] = useState(2);
   let [msg, setMsg] = useState(false);
+  let [재고, 재고변경] = useState([11, 12, 13]);
 
-  let [재고] = useState([10, 11, 12]);
   return (
     <div className="App">
       <Navbar bg="light" variant="light">
@@ -124,6 +125,8 @@ function App() {
         </Route>
 
         <Route path="*" element={<div>없는 페이지 입니다.</div>} />
+
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );

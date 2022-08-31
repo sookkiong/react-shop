@@ -3,8 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
-
-import { Context1 } from '../App.js';
+import { Context1 } from './../App.js';
 
 const DetailPage = (props) => {
   let [count, setCount] = useState(0);
