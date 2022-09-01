@@ -13,7 +13,7 @@ let list = createSlice({
   name: 'list',
   initialState: [
     { id: 0, name: 'White and Black', count: 2 },
-    { id: 2, name: 'Grey Yordan', count: 1 },
+    { id: 1, name: 'Grey Yordan', count: 100 },
   ],
 });
 
