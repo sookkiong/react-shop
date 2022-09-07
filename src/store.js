@@ -12,7 +12,14 @@ let list = createSlice({
     { id: 0, name: 'White and Black', count: 2 },
     { id: 1, name: 'Grey Yordan', count: 100 },
   ],
+  reducers: {
+    countUp(state, action) {
+      state[action.payload].count += 1;
+    },
+  },
 });
+
+export let { countUp } = list.actions;
 
 export default configureStore({
   reducer: {

@@ -16,7 +16,7 @@ let user = createSlice({
       state.age += 10;
     },
 
-    // 이 버튼을 눌렀을 땐 +10, 이 버튼을 눌렀을 땐 +2가 올라가도록 각각 짜려면 여러 개의 state함수를 만들어야 되는데, 파라미터를  이용하면 한번에 만들 수 있다.
+    // 이 버튼을 눌렀을 땐 +10, 이 버튼을 눌렀을 땐 +2가 올라가도록 각각 짜려면 여러 개의 state함수를 만들어야 되는데, 파라미터를 이용하면 한번에 만들 수 있다.
     increase(state, action) {
       state.age += action.payload;
     },

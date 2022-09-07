@@ -1,6 +1,7 @@
 import './../App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeName, plusAge, increase } from './../store/userSlice.js';
+import { countUp } from './../store.js';
 
 function Cart() {
   let a = useSelector((state) => {
@@ -40,7 +41,7 @@ function Cart() {
                 <td>
                   <button
                     onClick={() => {
-                      dispatch(changeName());
+                      dispatch(countUp(i));
                     }}
                   >
                     +
