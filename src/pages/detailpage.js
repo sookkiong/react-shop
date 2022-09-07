@@ -4,7 +4,9 @@ import { useParams } from 'react-router';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import { Context1 } from './../App.js';
-
+import { setList } from './../store.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 const DetailPage = (props) => {
   let [count, setCount] = useState(0);
   let { id } = useParams();
@@ -48,7 +50,11 @@ const DetailPage = (props) => {
 
     border: none;
   `;
-
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  let a = useSelector((res) => {
+    return res;
+  });
   return (
     <div className={`container + start + ${nope}`}>
       <div className="row">
@@ -65,9 +71,18 @@ const DetailPage = (props) => {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
-          <RedButton id="button" disabled={alertNum}>
+
+          <RedButton
+            id="button"
+            disabled={alertNum}
+            onClick={() => {
+              dispatch(setList(props.shoes[id]));
+              console.log(a.list);
+            }}
+          >
             주문하기
           </RedButton>
+          <RedButton onClick={() => navigate('/cart')}>장바구니</RedButton>
         </div>
       </div>
 
