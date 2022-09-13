@@ -1,7 +1,7 @@
 import './../App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeName, plusAge, increase } from './../store/userSlice.js';
-import { countUp } from './../store.js';
+import { countUp, setRemove } from './../store.js';
 
 function Cart() {
   let a = useSelector((state) => {
@@ -29,6 +29,7 @@ function Cart() {
             <th>상품명</th>
             <th>수량</th>
             <th>변경하기</th>
+            <th>항목 삭제하기</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +46,15 @@ function Cart() {
                     }}
                   >
                     +
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      dispatch(setRemove(v.id));
+                    }}
+                  >
+                    삭제
                   </button>
                 </td>
               </tr>
