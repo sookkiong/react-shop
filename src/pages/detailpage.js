@@ -7,6 +7,7 @@ import { Context1 } from './../App.js';
 import { setList } from './../store.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+
 const DetailPage = (props) => {
   let [count, setCount] = useState(0);
   let { id } = useParams();
@@ -76,8 +77,8 @@ const DetailPage = (props) => {
             id="button"
             disabled={alertNum}
             onClick={() => {
-              dispatch(setList(props.shoes[id]));
-              console.log(a.list);
+              dispatch(setList(props.shoes[id].id));
+              console.log(props.shoes[id].id);
             }}
           >
             주문하기
