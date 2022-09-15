@@ -20,18 +20,18 @@ let list = createSlice({
       state[번호].count += 1;
     },
     setList(state, action) {
-      if (action.payload !== state.id) {
+      const findItem = state.find((v) => v.id === action.payload.id);
+      if (!findItem) {
         state.push(action.payload);
       } else {
-        alert('이미 담겼어');
+        alert('이미 담겼어요!');
       }
     },
 
     setRemove(state, action) {
-      const newList = state.filter((a) => {
+      return state.filter((a) => {
         return a.id !== action.payload; //받아온 id값을 제외한 다른 객체로 구성되는 새로운 배열을 생성함
       });
-      console.log(newList);
     },
   },
 });

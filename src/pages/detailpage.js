@@ -15,7 +15,6 @@ const DetailPage = (props) => {
   let [content, setContent] = useState('');
   let [탭, 탭변경] = useState(0);
   let [nope, setNope] = useState('');
-
   useEffect(() => {
     if (isNaN(content) == true) {
       setAlertNum(true);
@@ -77,8 +76,7 @@ const DetailPage = (props) => {
             id="button"
             disabled={alertNum}
             onClick={() => {
-              dispatch(setList(props.shoes[id].id));
-              console.log(props.shoes[id].id);
+              dispatch(setList(props.shoes[id]));
             }}
           >
             주문하기

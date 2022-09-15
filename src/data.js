@@ -20,6 +20,8 @@ let data = [
     title: 'Grey Yordan',
     content: 'Born in the States',
     price: 130000,
+    name: 'Grey Yordan',
+    count: 3,
   },
 ];
 
