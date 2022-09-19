@@ -19,19 +19,23 @@ let list = createSlice({
       });
       state[번호].count += 1;
     },
-    setList(state, action) {
-      const findItem = state.find((v) => v.id === action.payload.id);
-      if (!findItem) {
-        state.push(action.payload);
-      } else {
-        alert('이미 담겼어요!');
-      }
-    },
 
     setRemove(state, action) {
       return state.filter((a) => {
-        return a.id !== action.payload; //받아온 id값을 제외한 다른 객체로 구성되는 새로운 배열을 생성함
+        //넘겨준 id값을 받아서 그 id를 제외한 배열을 return 해준다.
+        return action.payload != a.id;
       });
+    },
+
+    setList(state, action) {
+      const listId = state.find((a) => {
+        return a.id === action.payload.id;
+      });
+      if (listId === undefined) {
+        return alert('상품이 담겼습니다.'), state.concat(action.payload);
+      } else {
+        alert('이미 담겼습니다!');
+      }
     },
   },
 });
