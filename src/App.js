@@ -13,6 +13,12 @@ import Cart from './pages/Cart.js';
 export let Context1 = createContext();
 
 function App() {
+  let obj = { name: 'kim' };
+  localStorage.setItem('data', JSON.stringify(obj));
+
+  let saving = localStorage.getItem('data');
+  console.log(JSON.parse(saving));
+
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
   let [showBox, setShowBox] = useState(true);
