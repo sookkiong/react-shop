@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import { Context1 } from './../App.js';
-import { setList } from './../store.js';
+import { setList, watchedId } from './../store.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -15,6 +15,13 @@ const DetailPage = (props) => {
   let [content, setContent] = useState('');
   let [탭, 탭변경] = useState(0);
   let [nope, setNope] = useState('');
+
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  let a = useSelector((res) => {
+    return res;
+  });
+
   useEffect(() => {
     if (isNaN(content) == true) {
       setAlertNum(true);
@@ -28,6 +35,11 @@ const DetailPage = (props) => {
     return () => {
       setNope('');
     };
+  }, []);
+
+  useEffect(() => {
+    let listId = props.shoes[id].id;
+    dispatch(watchedId(listId)); // id값 받아오기 정상작동중
   }, []);
 
   let RedButton = styled.button`
@@ -50,11 +62,7 @@ const DetailPage = (props) => {
 
     border: none;
   `;
-  let navigate = useNavigate();
-  let dispatch = useDispatch();
-  let a = useSelector((res) => {
-    return res;
-  });
+
   return (
     <div className={`container + start + ${nope}`}>
       <div className="row">

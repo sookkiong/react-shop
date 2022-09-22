@@ -37,10 +37,16 @@ let list = createSlice({
         alert('이미 담겼습니다!');
       }
     },
+
+    watchedId(state, action) {
+      state.find((v) => {
+        return v.id === action.payload;
+      });
+    },
   },
 });
 
-export let { countUp, setList, setRemove } = list.actions;
+export let { countUp, setList, setRemove, watchedId } = list.actions;
 
 export default configureStore({
   reducer: {

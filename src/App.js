@@ -9,15 +9,23 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import Cart from './pages/Cart.js';
+import { useDispatch } from 'react-redux';
+import { watchedId } from './store';
 
 export let Context1 = createContext();
 
 function App() {
+  let dispatch = useDispatch();
+
   let obj = { name: 'kim' };
   localStorage.setItem('data', JSON.stringify(obj));
 
   let saving = localStorage.getItem('data');
   console.log(JSON.parse(saving));
+
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify([dispatch(watchedId())]));
+  }, []);
 
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
