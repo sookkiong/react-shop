@@ -9,23 +9,15 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import Cart from './pages/Cart.js';
-import { useDispatch } from 'react-redux';
-import { watchedId } from './store';
 
 export let Context1 = createContext();
 
 function App() {
-  let dispatch = useDispatch();
-
   let obj = { name: 'kim' };
   localStorage.setItem('data', JSON.stringify(obj));
 
   let saving = localStorage.getItem('data');
   console.log(JSON.parse(saving));
-
-  useEffect(() => {
-    localStorage.setItem('watched', JSON.stringify([dispatch(watchedId())]));
-  }, []);
 
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
@@ -35,6 +27,13 @@ function App() {
   let [userClick, setUserClick] = useState(2);
   let [msg, setMsg] = useState(false);
   let [재고, 재고변경] = useState([11, 12, 13]);
+
+  useEffect(() => {
+    if (!window.localStorage.getItem('watched')) {
+      window.localStorage.setItem('watched', JSON.stringify([]));
+      console.log('watched 스토리지가 만들어졌습니다');
+    }
+  }, []);
 
   return (
     <div className="App">

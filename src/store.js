@@ -37,12 +37,6 @@ let list = createSlice({
         alert('이미 담겼습니다!');
       }
     },
-
-    watchedId(state, action) {
-      state.find((v) => {
-        return v.id === action.payload;
-      });
-    },
   },
 });
 

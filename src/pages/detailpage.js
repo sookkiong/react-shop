@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import { Context1 } from './../App.js';
-import { setList, watchedId } from './../store.js';
+import { setList } from './../store.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -38,8 +38,10 @@ const DetailPage = (props) => {
   }, []);
 
   useEffect(() => {
-    let listId = props.shoes[id].id;
-    dispatch(watchedId(listId)); // id값 받아오기 정상작동중
+    let storageSum = window.localStorage.getItem('watched');
+    storageSum = JSON.parse(storageSum);
+    storageSum.push(props.shoes[id].id);
+    window.localStorage.setItem('watched', JSON.stringify(storageSum));
   }, []);
 
   let RedButton = styled.button`
