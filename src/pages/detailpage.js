@@ -41,7 +41,8 @@ const DetailPage = (props) => {
     let storageSum = window.localStorage.getItem('watched');
     storageSum = JSON.parse(storageSum);
     storageSum.push(props.shoes[id].id);
-    window.localStorage.setItem('watched', JSON.stringify(storageSum));
+    let newStorage = [...new Set(storageSum)];
+    window.localStorage.setItem('watched', JSON.stringify(newStorage));
   }, []);
 
   let RedButton = styled.button`
