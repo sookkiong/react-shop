@@ -43,6 +43,7 @@ const DetailPage = (props) => {
     storageSum.push(props.shoes[id].id);
     let newStorage = [...new Set(storageSum)];
     window.localStorage.setItem('watched', JSON.stringify(newStorage));
+    console.log(newStorage);
   }, []);
 
   let RedButton = styled.button`
@@ -75,6 +76,7 @@ const DetailPage = (props) => {
             width="100%"
           />
         </div>
+
         <div className="col-md-6">
           <input onChange={(e) => setContent(e.target.value)} />
           {alertNum ? <p style={{ color: 'red' }}>숫자만 입력해주세요.</p> : null}

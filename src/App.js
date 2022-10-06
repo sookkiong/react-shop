@@ -27,6 +27,7 @@ function App() {
   let [userClick, setUserClick] = useState(2);
   let [msg, setMsg] = useState(false);
   let [재고, 재고변경] = useState([11, 12, 13]);
+  let lookedItem = JSON.parse(window.localStorage.getItem('watched'));
 
   useEffect(() => {
     if (!window.localStorage.getItem('watched')) {
@@ -58,6 +59,8 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
+      <MyGoods lookedItem={lookedItem} />
 
       <Routes>
         <Route
@@ -185,6 +188,18 @@ const Event = () => {
       <Outlet></Outlet>
     </div>
   );
+};
+
+const MyGoods = (props) => {
+  if (props.lookedItem != undefined) {
+    return (
+      <div>
+        {props.lookedItem.map(function (v, i) {
+          return <div>{v}</div>;
+        })}
+      </div>
+    );
+  }
 };
 
 export default App;
