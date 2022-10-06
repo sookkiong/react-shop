@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import Cart from './pages/Cart.js';
+import { useQuery } from 'react-query';
 
 export let Context1 = createContext();
 
@@ -36,6 +37,16 @@ function App() {
     }
   }, []);
 
+  let result = useQuery(
+    '작명',
+    () =>
+      axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
+        console.log('요청됨');
+        return a.data;
+      }),
+    { staleTime: 2000 }
+  );
+
   return (
     <div className="App">
       <Navbar bg="light" variant="light">
@@ -57,6 +68,7 @@ function App() {
               상세페이지
             </Nav.Link>
           </Nav>
+          <Nav className="ms-auto">{result.isLoading ? '로딩 중' : result.data.name}</Nav>
         </Container>
       </Navbar>
 
@@ -194,8 +206,13 @@ const MyGoods = (props) => {
   if (props.lookedItem != undefined) {
     return (
       <div>
+        <div>내가 방금 뭘 봤더라?</div>
         {props.lookedItem.map(function (v, i) {
-          return <div>{v}</div>;
+          return (
+            <div>
+              <div>{v}번 상품 봄</div>
+            </div>
+          );
         })}
       </div>
     );
