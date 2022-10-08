@@ -8,7 +8,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import { useQuery } from 'react-query';
-
+import styled from 'styled-components';
+import { Cookies } from 'react-cookie';
 // import DetailPage from './pages/detailpage';
 // import Cart from './pages/Cart.js';
 
@@ -18,9 +19,9 @@ const Cart = lazy(() => import('./pages/Cart.js'));
 export let Context1 = createContext();
 
 function App() {
+  let cookie = new Cookies();
   let obj = { name: 'kim' };
   localStorage.setItem('data', JSON.stringify(obj));
-
   let saving = localStorage.getItem('data');
   console.log(JSON.parse(saving));
 
@@ -33,6 +34,7 @@ function App() {
   let [msg, setMsg] = useState(false);
   let [재고, 재고변경] = useState([11, 12, 13]);
   let lookedItem = JSON.parse(window.localStorage.getItem('watched'));
+  let [pop, setPop] = useState(true);
 
   useEffect(() => {
     if (!window.localStorage.getItem('watched')) {
@@ -79,6 +81,8 @@ function App() {
       </Navbar>
 
       <MyGoods lookedItem={lookedItem} />
+
+      {pop && cookie.get('pop') !== 'true' ? <PopUp setPop={setPop} cookie={cookie} /> : null}
 
       <Suspense fallback={<div>페이지 로딩 중</div>}>
         <Routes>
@@ -227,4 +231,44 @@ const MyGoods = (props) => {
   }
 };
 
+const PopUp = ({ setPop, cookie }) => {
+  let now = new Date();
+  let after1m = new Date();
+  after1m.setMinutes(now.getMinutes() + 1);
+  return (
+    <PopupBox>
+      <div>팝업창입니다</div>
+      <div>
+        <button
+          onClick={() => {
+            setPop(false);
+          }}
+        >
+          x
+        </button>
+        <button
+          onClick={() => {
+            cookie.set('pop', 'true', {
+              expires: after1m,
+            });
+            setPop(false);
+          }}
+        >
+          다시 보지 않기
+        </button>
+      </div>
+    </PopupBox>
+  );
+};
+
 export default App;
+
+const PopupBox = styled.div`
+  border: 1px solid black;
+  background: #fff;
+  position: fixed;
+  width: 50%;
+  top: 50%;
+  left: calc(50% - 25%);
+  padding: 50px;
+`;
