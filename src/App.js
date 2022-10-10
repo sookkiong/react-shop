@@ -82,7 +82,7 @@ function App() {
 
       <MyGoods lookedItem={lookedItem} />
 
-      {pop && cookie.get('pop') !== 'true' ? <PopUp setPop={setPop} cookie={cookie} /> : null}
+      {/* {pop && cookie.get('pop') !== 'true' ? <PopUp setPop={setPop} cookie={cookie} /> : null} */}
 
       <Suspense fallback={<div>페이지 로딩 중</div>}>
         <Routes>
