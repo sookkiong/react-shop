@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap';
 import { lazy, Suspense, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useTransition, useDeferredValue } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import { useQuery } from 'react-query';
@@ -52,6 +52,9 @@ function App() {
       }),
     { staleTime: 2000 }
   );
+
+  let [isPending, startTransition] = useTransition();
+  let state = useDeferredValue(pop);
 
   return (
     <div className="App">
