@@ -22,6 +22,15 @@ const DetailPage = (props) => {
     return res;
   });
 
+  let [counts, setCounts] = useState(0);
+  let [age, setAge] = useState(20);
+
+  useEffect(() => {
+    if (counts != 0 && counts < 3) {
+      setAge(age + 1);
+    }
+  }, [counts]);
+
   useEffect(() => {
     if (isNaN(content) == true) {
       setAlertNum(true);
@@ -132,6 +141,15 @@ const DetailPage = (props) => {
       </Nav>
 
       <TabContent 탭={탭} />
+      <br />
+      <div>안녕하십니까 전 {age}</div>
+      <button
+        onClick={() => {
+          setCounts(counts + 1);
+        }}
+      >
+        누르면한살먹기
+      </button>
     </div>
   );
 };
